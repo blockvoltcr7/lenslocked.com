@@ -23,14 +23,6 @@ func main() {
 		panic(err)
 	}
 
-	// user := struct {
-	// 	Name string
-	// 	Age  int
-	// }{
-	// 	Name: "Sami Sabir-idrissi",
-	// 	Age:  32,
-	// }
-
 	user := User{
 		Name: "Sami Sabir-Idrissi",
 		Age:  32,
