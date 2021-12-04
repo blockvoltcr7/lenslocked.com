@@ -31,20 +31,15 @@ func executeTemplate(w http.ResponseWriter, filepath string) {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	executeTemplate(w, "templates/home.gohtml")
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	executeTemplate(w, "templates/contact.gohtml")
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>FAQ page!!!</h1>")
-
+	executeTemplate(w, "templates/faq.gohtml")
 }
 
 // HTTP handler accessing the url routing parameters.
