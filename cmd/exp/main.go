@@ -7,32 +7,26 @@ import (
 
 type User struct {
 	Name string
+	Bio  string
 	Age  int
-	Meta UserMeta
-}
-
-type UserMeta struct {
-	Visits int
+	Job  string
 }
 
 func main() {
-
 	t, err := template.ParseFiles("hello.gohtml")
-
 	if err != nil {
 		panic(err)
 	}
 
 	user := User{
-		Name: "Sami Sabir-Idrissi",
-		Age:  32,
-		Meta: UserMeta{Visits: 4},
+		Name: "Jon Calhoun",
+		Bio:  `<script>alert("Haha, you have been h4x0r3d!");</script>`,
+		Age:  123,
+		Job:  "Senior Go Cloud Engineer",
 	}
 
 	err = t.Execute(os.Stdout, user)
-
 	if err != nil {
 		panic(err)
 	}
-
 }
