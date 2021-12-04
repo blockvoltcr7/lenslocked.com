@@ -9,39 +9,37 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
+func executeTemplate(w http.ResponseWriter, filepath string) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tpl, err := template.ParseFiles("templates/home.gohtml")
+	tpl, err := template.ParseFiles(filepath)
 	if err != nil {
 		log.Printf("parsing template: %v", err)
-		http.Error(w, "there was an error parsing the templates for homeHandler", http.StatusInternalServerError)
+		http.Error(w, "there was an error parsing the templates",
+			http.StatusInternalServerError)
 		return
 	}
 
 	err = tpl.Execute(w, nil)
-
 	if err != nil {
 		log.Printf("parsing template: %v", err)
-		http.Error(w, "there was an error executing the template at homeHandler", http.StatusInternalServerError)
+		http.Error(w, "there was an error executing the template",
+			http.StatusInternalServerError)
 		return
 	}
 
 }
 
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	executeTemplate(w, "templates/home.gohtml")
+}
+
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w,
-		"<h1>contact page</h1><p>to get in touch, email me at <a href=\"mailto:smaisabir212@gmail.com\">samisabir212@gmail.com</a>")
-
+	executeTemplate(w, "templates/contact.gohtml")
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>FAQ page!!!</h1>")
-
+	executeTemplate(w, "templates/faq.gohtml")
 }
 
 // HTTP handler accessing the url routing parameters.
