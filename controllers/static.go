@@ -3,11 +3,9 @@ package controllers
 import (
 	"html/template"
 	"net/http"
-
-	"lenslocked.com/views"
 )
 
-func StaticHandler(tpl views.Template) http.HandlerFunc {
+func StaticHandler(tpl Template) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		tpl.Execute(w, nil)
@@ -15,7 +13,7 @@ func StaticHandler(tpl views.Template) http.HandlerFunc {
 
 }
 
-func FAQ(tpl views.Template) http.HandlerFunc {
+func FAQ(tpl Template) http.HandlerFunc {
 	questions := []struct {
 		Question string
 		Answer   template.HTML
@@ -37,6 +35,7 @@ func FAQ(tpl views.Template) http.HandlerFunc {
 			Answer:   "Our entire team is remote!",
 		},
 	}
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		tpl.Execute(w, questions)
 	}
